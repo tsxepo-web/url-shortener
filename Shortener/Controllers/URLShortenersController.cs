@@ -5,6 +5,7 @@ using System.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Shortener.Data;
+using Shortener.Models;
 
 namespace Shortener.Controllers
 {
@@ -28,6 +29,11 @@ namespace Shortener.Controllers
         {
             string longUrl = _shortenersRepository.GetLongUrl(shortUrl).Result;
             return new RedirectResult(longUrl);
+        }
+        [HttpGet]
+        public async Task<IEnumerable<UrlMapping>> GetMappings()
+        {
+            return await _shortenersRepository.GetAllMappings();
         }
     }
 }

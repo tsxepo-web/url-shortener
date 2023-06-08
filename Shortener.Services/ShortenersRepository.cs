@@ -65,4 +65,9 @@ public class ShortenersRepository : IShortenersRepository
             throw new Exception("ShortUrl not found. Try creating a new one.");
         }
     }
+
+    public async Task<IEnumerable<UrlMapping>> GetAllMappings()
+    {
+        return await _mongoCollection.Find(_ => true).ToListAsync();
+    }
 }
