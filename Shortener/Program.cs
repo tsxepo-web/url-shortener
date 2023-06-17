@@ -9,9 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 DotEnv.Load();
 var envKeys = DotEnv.Read();
 
-var mongoConnectionString = envKeys["ConnectionString"];
-var mongoDatabaseName = envKeys["DatabaseName"];
-var mongoCollectionName = envKeys["CollectionName"];
+var mongoConnectionString = "mongodb://url-shortener-db:tB7kQlucl34G8prxrOMtgnDuxSjQTGsKAbsdY4ghiwgBKzCf2BSj9t7SAQZ3jnGtJzZVvoUYI2SsACDbwnEeYg%3D%3D@url-shortener-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@url-shortener-db@";
+var mongoDatabaseName = "urlShortener";
+var mongoCollectionName = "shorteners";
 
 var mongoClient = new MongoClient(mongoConnectionString);
 var mongoDatabase = mongoClient.GetDatabase(mongoDatabaseName);
