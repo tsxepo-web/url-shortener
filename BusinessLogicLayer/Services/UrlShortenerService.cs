@@ -4,11 +4,11 @@ using SharedModels;
 
 namespace BusinessLogicLayer.Services
 {
-    public class UrlShortener : IUrlShortener
+    public class UrlShortenerService : IUrlShortener
     {
         private readonly IUrlMappingRepository _repository;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public UrlShortener(IUrlMappingRepository repository, IHttpContextAccessor httpContextAccessor)
+        public UrlShortenerService(IUrlMappingRepository repository, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _httpContextAccessor = httpContextAccessor;
