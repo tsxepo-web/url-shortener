@@ -1,8 +1,14 @@
+using BusinessLogicLayer.Services;
+using DataAccessLayer.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<IUrlShortener, UrlShortener>();
+builder.Services.AddTransient<IUrlMappingRepository, UrlMappingRepository>();
 
 var app = builder.Build();
 
