@@ -10,9 +10,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
-var mongoClient = new MongoClient("mongodb://url-shortener-db:tB7kQlucl34G8prxrOMtgnDuxSjQTGsKAbsdY4ghiwgBKzCf2BSj9t7SAQZ3jnGtJzZVvoUYI2SsACDbwnEeYg%3D%3D@url-shortener-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@url-shortener-db@");
-var mongoDatabase = mongoClient.GetDatabase("urlShortener");
-builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(ProviderAliasAttribute => mongoDatabase.GetCollection<UrlMapping>("shorteners"));
+var mongoSettings = builder.Configuration.GetSection("UrlShortenerDatabase").Get<UrlShortenerDatabaseSettings>();
+
+var mongoClient = new MongoClient(mongoSettings!.ConnectionString);
+var mongoDatabase = mongoClient.GetDatabase(mongoSettings.DatabaseName);
+builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(ProviderAliasAttribute => mongoDatabase.GetCollection<UrlMapping>(mongoSettings.CollectionName));
 
 builder.Services.AddTransient<IUrlShortener, UrlShortenerService>();
 builder.Services.AddTransient<IUrlMappingRepository, UrlMappingRepository>();
