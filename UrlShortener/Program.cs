@@ -2,7 +2,6 @@ using BusinessLogicLayer.Services;
 using DataAccessLayer.Repositories;
 using MongoDB.Driver;
 using SharedModels;
-using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
