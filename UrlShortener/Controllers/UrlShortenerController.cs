@@ -31,18 +31,5 @@ namespace UrlShortener.Controllers
             var response = new UrlShortResponseDto { Url = shortUrl };
             return Ok(response);
         }
-
-        [HttpGet("{shortUrlFallback}")]
-        public async Task<IActionResult> RedirectShortUrl()
-        {
-            var urlMatch = await _repository.FindByShortUrlAsync();
-
-            if (urlMatch == null)
-            {
-                return NotFound();
-            }
-
-            return Redirect(urlMatch.Url);
-        }
     }
 }
