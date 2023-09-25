@@ -2,6 +2,7 @@ using BusinessLogicLayer.Services;
 using DataAccessLayer.Repositories;
 using MongoDB.Driver;
 using SharedModels;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
-var mongoSettings = builder.Configuration.GetSection("UrlShortenerDatabase").Get<UrlShortenerDatabaseSettings>();
-
-var mongoClient = new MongoClient(mongoSettings!.ConnectionString);
-var mongoDatabase = mongoClient.GetDatabase(mongoSettings.DatabaseName);
-builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(ProviderAliasAttribute => mongoDatabase.GetCollection<UrlMapping>(mongoSettings.CollectionName));
+var mongodbSettings = builder.Configuration.GetSection("Shorteners").Get<UrlShortenerDatabaseSettings>();
+var mongoClient = new MongoClient(mongodbSettings!.ConnectionString);
+var mongoDatabase = mongoClient.GetDatabase(mongodbSettings.DatabaseName);
+builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(ProviderAliasAttribute => mongoDatabase.GetCollection<UrlMapping>(mongodbSettings.CollectionName));
 
 builder.Services.AddTransient<IUrlShortener, UrlShortenerService>();
 builder.Services.AddTransient<IUrlMappingRepository, UrlMappingRepository>();
