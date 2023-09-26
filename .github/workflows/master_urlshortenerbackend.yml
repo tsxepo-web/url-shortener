@@ -46,10 +46,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: .net-app
-      - name: Build and deploy
-        run: echo ${{ secrets.URLSHORTENERDATABASESETTINGS }} > secrets.json
-        env:
-          URLSHORTENERDATABASESETTINGS: $${{ secrets.URLSHORTENERDATABASESETTINGS }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -58,3 +55,7 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0042B6DD05434AFAB0682A076D07EB7F }}
           package: .
+        env: 
+          Connection_String: ${{ secrets.Connection_String }}
+          DatabaseName: ${{ secrets.DatabaseName }}
+          CollectionName: ${{ secrets.CollectionName }}
