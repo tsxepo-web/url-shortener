@@ -57,5 +57,5 @@ jobs:
           package: .
         env: 
           Connection_String: ${{ secrets.Connection_String }}
-          DatabaseName: ${{ secrets.DatabaseName }}
-          CollectionName: ${{ secrets.CollectionName }}
+          Database_Name: ${{ secrets.Database_Name }}
+          Collection_Name: ${{ secrets.Collection_Name }}
