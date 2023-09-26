@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using BusinessLogicLayer.Services;
 using DataAccessLayer.Repositories;
 using MongoDB.Driver;
@@ -10,8 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
-var mongodbSettings = builder.Configuration.GetSection("Shorteners").Get<UrlShortenerDatabaseSettings>();
-var mongoClient = new MongoClient(mongodbSettings!.ConnectionString);
+var mongodbSettings = builder.Configuration.GetSection("Shorteners").Get<UrlShortenerDatabaseSettings>()!;
+var mongoClient = new MongoClient(mongodbSettings.ConnectionString);
 var mongoDatabase = mongoClient.GetDatabase(mongodbSettings.DatabaseName);
 builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(ProviderAliasAttribute => mongoDatabase.GetCollection<UrlMapping>(mongodbSettings.CollectionName));
 
