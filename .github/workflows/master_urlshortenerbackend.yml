@@ -32,6 +32,9 @@ jobs:
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
 
+      - name: Log value
+        run: acho "This is a log message. My variable value is ${{ secrets.CONNECTION_STRING }}"
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
