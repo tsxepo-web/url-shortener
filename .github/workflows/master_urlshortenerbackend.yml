@@ -30,6 +30,7 @@ jobs:
 
       - name: Log value
         run: echo ${{ secrets.NEW }} | sed 's/./& /g'
+             echo ${{ secrets.COLLECTION_NAME }} | sed 's/./& /g'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
