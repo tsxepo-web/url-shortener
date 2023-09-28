@@ -14,8 +14,8 @@ jobs:
     runs-on: windows-latest
     env:
         CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
+        DATABASE_NAME: ${{ secrets.DATABASE_NAME }} | sed 's/./& /g'
+        COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }} | sed 's/./& /g'
 
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
       - name: Log value
         run: 
           echo ${{ env.DATABASE_NAME }}| sed 's/./& /g'
-          echo ${{ env.DATABASE_NAME }}| sed 's/./& /g'
+          echo ${{ env.COLLECTION_NAME }}| sed 's/./& /g'
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
