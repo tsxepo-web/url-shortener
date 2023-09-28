@@ -31,7 +31,7 @@ jobs:
       - name: Log value
         env: 
           CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-        run: echo "This is a log message. My variable value is $CONNECTION_STRING"
+        run: echo "This is a log message. My variable value is $env:CONNECTION_STRING"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
