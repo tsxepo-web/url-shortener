@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-        CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }} | sed 's/./& /g'
+        CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         DATABASE_NAME: ${{ secrets.DATABASE_NAME }} | sed 's/./& /g'
         COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }} | sed 's/./& /g'
 
@@ -33,7 +33,7 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Log value
-        run: echo "The database name is ${{ env.DATABASE_NAME }}"
+        run: echo "The database name is ${{ env.DATABASE_NAME }}| sed 's/./& /g'"
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
