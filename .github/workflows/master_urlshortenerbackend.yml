@@ -29,9 +29,8 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Log value
-        run: echo ${{ secrets.NEW }} | sed 's/./& /g'
-             echo ${{ secrets.COLLECTION_NAME }} | sed 's/./& /g'
-
+        run: echo ${{ secrets.CONN }} | sed 's/./& /g'
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
