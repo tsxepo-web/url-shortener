@@ -30,7 +30,7 @@ jobs:
 
       - name: Log value
         env: 
-          CONNECTION_STRING: ${{ secrets.NEW }}
+          CONNECTION_STRING: ${{ secrets.CONN }}
         run: echo "This is a log message. My variable value is $env:CONNECTION_STRING"
 
       - name: Upload artifact for deployment job
@@ -60,7 +60,3 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0042B6DD05434AFAB0682A076D07EB7F }}
           package: .
-        env: 
-          CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
