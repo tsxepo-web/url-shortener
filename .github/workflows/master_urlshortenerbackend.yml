@@ -27,10 +27,10 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-        env: 
-          CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
 
       - name: Log value
+        env: 
+          CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         run: echo "This is a log message. My variable value is $CONNECTION_STRING"
 
       - name: Upload artifact for deployment job
