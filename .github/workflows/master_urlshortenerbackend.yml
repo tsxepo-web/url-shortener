@@ -30,7 +30,7 @@ jobs:
 
       - name: Log value
         env: 
-          CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+          CONNECTION_STRING: ${{ secrets.NEW }}
         run: echo "This is a log message. My variable value is $env:CONNECTION_STRING"
 
       - name: Upload artifact for deployment job
