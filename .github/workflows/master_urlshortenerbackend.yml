@@ -31,12 +31,6 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
-      - name: Log value
-        run: 
-          echo ${{ env.CONNECTION_STRING }}
-          echo ${{ env.DATABASE_NAME }}
-          echo ${{ env.COLLECTION_NAME }}
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
