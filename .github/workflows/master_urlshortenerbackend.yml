@@ -33,7 +33,7 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Log value
-        run: echo "The database name is ${{ env.DATABASE_NAME }}| sed 's/./& /g'"
+        run: echo ${{ env.DATABASE_NAME }}| sed 's/./& /g'
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
