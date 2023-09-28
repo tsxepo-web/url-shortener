@@ -27,6 +27,10 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        env: 
+          CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2

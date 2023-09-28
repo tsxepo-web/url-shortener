@@ -8,8 +8,8 @@ namespace SharedModels
 {
     public class UrlShortenerDatabaseSettings
     {
-        public string? ConnectionString { get; set; }
-        public string? DatabaseName { get; set; }
-        public string? CollectionName { get; set; }
+        public string? CONNECTION_STRING { get; set; }
+        public string? DATABASE_NAME { get; set; }
+        public string? COLLECTION_NAME { get; set; }
     }
 }
