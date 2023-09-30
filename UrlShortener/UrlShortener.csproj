@@ -4,10 +4,10 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<UserSecretsId>55b6a323-9209-497f-b53f-7e26a1f9e76e</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="dotenv.net" Version="3.1.2" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
 		<PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="6.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
