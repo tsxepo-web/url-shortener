@@ -16,6 +16,7 @@ jobs:
         CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
         COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
+        files: file
 
     steps:
       - uses: actions/checkout@v2
@@ -37,6 +38,13 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+
+      - name: test the environments
+        run: 
+          echo {{ env.CONNECTION_STRING }}
+          echo {{ env.DATABASE_NAME }}
+          echo {{ env.COLLECTION_NAME }}
+          echo {{ env.files }}
 
   deploy:
     runs-on: windows-latest
