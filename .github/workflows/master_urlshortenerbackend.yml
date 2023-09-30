@@ -12,11 +12,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-        CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
-        files: file
 
     steps:
       - uses: actions/checkout@v2
@@ -32,19 +27,12 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-        
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
-      - name: test the environments
-        run: 
-          echo $CONNECTION_STRING
-          echo $DATABASE_NAME
-          echo $COLLECTION_NAME
-          echo $files
 
   deploy:
     runs-on: windows-latest
@@ -52,7 +40,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
@@ -65,5 +53,5 @@ jobs:
         with:
           app-name: 'urlShortenerBackend'
           slot-name: 'Production'
-          publish-profile: "${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0042B6DD05434AFAB0682A076D07EB7F }}"
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9B2C70AAD80B456DB98C526310814A27 }}
           package: .
