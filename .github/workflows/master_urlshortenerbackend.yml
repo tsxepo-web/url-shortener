@@ -41,10 +41,10 @@ jobs:
 
       - name: test the environments
         run: 
-          echo {{ env.CONNECTION_STRING }}
-          echo {{ env.DATABASE_NAME }}
-          echo {{ env.COLLECTION_NAME }}
-          echo {{ env.files }}
+          echo $CONNECTION_STRING
+          echo $DATABASE_NAME
+          echo $COLLECTION_NAME
+          echo $files
 
   deploy:
     runs-on: windows-latest
@@ -65,5 +65,5 @@ jobs:
         with:
           app-name: 'urlShortenerBackend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0042B6DD05434AFAB0682A076D07EB7F }}
+          publish-profile: "${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0042B6DD05434AFAB0682A076D07EB7F }}"
           package: .
