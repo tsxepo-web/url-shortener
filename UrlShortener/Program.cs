@@ -17,7 +17,6 @@ var CONNECTION_STRING = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 var DATABASE_NAME = Environment.GetEnvironmentVariable("DATABASE_NAME");
 var COLLECTION_NAME = Environment.GetEnvironmentVariable("COLLECTION_NAME");
 
-//var mongodbSettings = builder.Configuration.GetSection("Shorteners").Get<UrlShortenerDatabaseSettings>()!;
 var mongoClient = new MongoClient(CONNECTION_STRING);
 var mongoDatabase = mongoClient.GetDatabase(DATABASE_NAME);
 builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(

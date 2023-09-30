@@ -16,7 +16,6 @@ jobs:
         CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
         COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
-        files: file
 
     steps:
       - uses: actions/checkout@v2
