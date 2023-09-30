@@ -11,19 +11,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
-var mongodbSettings = new UrlShortenerDatabaseSettings
-{
-    CONNECTION_STRING = Environment.GetEnvironmentVariable("CONNECTION_STRING"),
-    DATABASE_NAME = Environment.GetEnvironmentVariable("DATABASE_NAME"),
-    COLLECTION_NAME = Environment.GetEnvironmentVariable("COLLECTION_NAME")
-
-};
+var CONNECTION_STRING = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+var DATABASE_NAME = Environment.GetEnvironmentVariable("DATABASE_NAME");
+var COLLECTION_NAME = Environment.GetEnvironmentVariable("COLLECTION_NAME");
 
 //var mongodbSettings = builder.Configuration.GetSection("Shorteners").Get<UrlShortenerDatabaseSettings>()!;
-var mongoClient = new MongoClient(mongodbSettings.CONNECTION_STRING);
-var mongoDatabase = mongoClient.GetDatabase(mongodbSettings.DATABASE_NAME);
-builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(ProviderAliasAttribute =>
-    mongoDatabase.GetCollection<UrlMapping>(mongodbSettings.COLLECTION_NAME));
+var mongoClient = new MongoClient(CONNECTION_STRING);
+var mongoDatabase = mongoClient.GetDatabase(DATABASE_NAME);
+builder.Services.AddSingleton<IMongoCollection<UrlMapping>>(
+    ProviderAliasAttribute =>
+        mongoDatabase.GetCollection<UrlMapping>(COLLECTION_NAME));
+
 
 builder.Services.AddTransient<IUrlShortener, UrlShortenerService>();
 builder.Services.AddTransient<IUrlMappingRepository, UrlMappingRepository>();
