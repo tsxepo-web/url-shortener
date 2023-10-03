@@ -32,7 +32,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(opt =>
+    {
+        opt.SwaggerEndpoint("swagger/v1/swagger.json", "v1");
+        opt.RoutePrefix = "";
+    });
 }
 app.MapFallback(handler: async (IUrlMappingRepository _repository) =>
 {
