@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using dotenv.net;
 using BusinessLogicLayer.Services;
 using DataAccessLayer.Repositories;
@@ -32,11 +31,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(opt =>
-    {
-        opt.SwaggerEndpoint("swagger/v1/swagger.json", "v1");
-        opt.RoutePrefix = "";
-    });
+    app.UseSwaggerUI();
 }
 app.MapFallback(handler: async (IUrlMappingRepository _repository) =>
 {
