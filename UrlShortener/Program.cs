@@ -33,9 +33,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapFallback(handler: async (IUrlMappingRepository _repository) =>
+app.MapFallback(handler: async (IUrlMappingRepository _repository, IHttpContextAccessor contextAccessor) =>
 {
-    var urlMatch = await _repository.FindByShortUrlAsync();
+    var path = contextAccessor.HttpContext!.Request.Path.ToUriComponent().Trim('/').ToLower();
+    var urlMatch = await _repository.FindByShortUrlAsync(path);
     return Results.Redirect(urlMatch.Url);
 });
 

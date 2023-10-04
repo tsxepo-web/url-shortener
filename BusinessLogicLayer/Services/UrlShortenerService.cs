@@ -1,5 +1,4 @@
 ﻿using DataAccessLayer.Repositories;
-using Microsoft.AspNetCore.Http;
 using SharedModels;
 
 namespace BusinessLogicLayer.Services
@@ -7,15 +6,12 @@ namespace BusinessLogicLayer.Services
     public class UrlShortenerService : IUrlShortener
     {
         private readonly IUrlMappingRepository _repository;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public UrlShortenerService(IUrlMappingRepository repository, IHttpContextAccessor httpContextAccessor)
+        public UrlShortenerService(IUrlMappingRepository repository)
         {
             _repository = repository;
-            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<string> ShortenUrlAsync(UrlDto url)
         {
-            string baseUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
             string shortUrl;
 
             ValidateUrl(url);
@@ -35,7 +31,7 @@ namespace BusinessLogicLayer.Services
                 await _repository.InsertAsync(newMap);
 
             }
-            return $"{baseUrl}/{shortUrl}";
+            return shortUrl;
         }
         private void ValidateUrl(UrlDto url)
         {

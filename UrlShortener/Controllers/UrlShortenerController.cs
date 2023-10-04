@@ -10,9 +10,11 @@ namespace UrlShortener.Controllers
     public class UrlShortenerController : ControllerBase
     {
         private readonly IUrlShortener _urlShortener;
-        public UrlShortenerController(IUrlShortener urlShortener)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public UrlShortenerController(IUrlShortener urlShortener, IHttpContextAccessor contextAccessor)
         {
             _urlShortener = urlShortener;
+            _contextAccessor = contextAccessor;
         }
 
         [HttpPost("shortUrl")]
@@ -22,9 +24,10 @@ namespace UrlShortener.Controllers
             {
                 return BadRequest("Invalid input");
             }
-
             string shortUrl = await _urlShortener.ShortenUrlAsync(url);
-            var response = new UrlShortResponseDto { Url = shortUrl };
+            string baseUrl = $"{_contextAccessor.HttpContext!.Request.Scheme}://{_contextAccessor.HttpContext.Request.Host}";
+            string res = $"{baseUrl}/{shortUrl}";
+            var response = new UrlShortResponseDto { Url = res };
             return Ok(response);
         }
     }

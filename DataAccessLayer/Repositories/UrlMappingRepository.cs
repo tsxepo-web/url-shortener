@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using SharedModels;
 
 namespace DataAccessLayer.Repositories
@@ -7,15 +6,12 @@ namespace DataAccessLayer.Repositories
     public class UrlMappingRepository : IUrlMappingRepository
     {
         private readonly IMongoCollection<UrlMapping> _mongoCollection;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public UrlMappingRepository(IMongoCollection<UrlMapping> mongoCollection, IHttpContextAccessor httpContextAccessor)
+        public UrlMappingRepository(IMongoCollection<UrlMapping> mongoCollection)
         {
             _mongoCollection = mongoCollection;
-            _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<UrlMapping> FindByShortUrlAsync()
+        public async Task<UrlMapping> FindByShortUrlAsync(string path)
         {
-            var path = _httpContextAccessor.HttpContext!.Request.Path.ToUriComponent().Trim('/').ToLower();
             var urlMatch = await _mongoCollection.Find(x => x.ShortUrl.ToLower().Trim() == path).FirstOrDefaultAsync();
             return urlMatch ?? throw new Exception("Short URL not found.");
         }
