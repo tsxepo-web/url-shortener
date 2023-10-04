@@ -1,6 +1,5 @@
 ﻿using BusinessLogicLayer.Services;
 using DataAccessLayer.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedModels;
 
@@ -11,12 +10,9 @@ namespace UrlShortener.Controllers
     public class UrlShortenerController : ControllerBase
     {
         private readonly IUrlShortener _urlShortener;
-        private readonly IUrlMappingRepository _repository;
-
-        public UrlShortenerController(IUrlShortener urlShortener, IUrlMappingRepository repository)
+        public UrlShortenerController(IUrlShortener urlShortener)
         {
             _urlShortener = urlShortener;
-            _repository = repository;
         }
 
         [HttpPost("shortUrl")]
