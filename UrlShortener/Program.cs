@@ -13,7 +13,7 @@ builder.Services.AddHttpContextAccessor();
 var CONNECTION_STRING = "mongodb://url-shortener-db:tB7kQlucl34G8prxrOMtgnDuxSjQTGsKAbsdY4ghiwgBKzCf2BSj9t7SAQZ3jnGtJzZVvoUYI2SsACDbwnEeYg==@url-shortener-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@url-shortener-db@";
 
 
-DotEnv.Load();
+//DotEnv.Load();
 //var CONNECTION_STRING = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 //var DATABASE_NAME = Environment.GetEnvironmentVariable("DATABASE_NAME");
 //var COLLECTION_NAME = Environment.GetEnvironmentVariable("COLLECTION_NAME");
